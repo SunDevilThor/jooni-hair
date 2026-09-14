@@ -16,7 +16,7 @@ index.html      Home
 services.html   Service list, no prices until the client supplies them
 gallery.html    Filterable gallery with a keyboard accessible lightbox
 book.html       Booking flow, DM message composer, deposit slot
-about.html      About Joon, products, custom colour work
+about.html      About Joon, products, custom color work
 404.html
 css/style.css   All styling, mobile first
 css/fonts.css   Self hosted Syne and Inter, no third party font request

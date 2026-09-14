@@ -464,7 +464,7 @@ body.is-locked{overflow:hidden}
   .footer__grid{grid-template-columns:1.4fr 1fr 1fr}
 }
 /* Tablet widths: the single column is wide, so portrait media is
-   capped and centred rather than running the full page width. */
+   capped and centered rather than running the full page width. */
 @media (min-width:600px) and (max-width:899px){
   .hero__figure,.split__media{max-width:430px;margin-inline:auto}
   .hero__grid,.split{justify-items:center}
