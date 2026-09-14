@@ -47,7 +47,9 @@ body{
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
-img,video{max-width:100%;display:block}
+/* height:auto keeps HTML width/height attributes from fixing a rendered
+   height. The attributes stay, so the browser still reserves the space. */
+img,video{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 h1,h2,h3,h4{font-family:var(--display);font-weight:800;line-height:1.02;margin:0;letter-spacing:-.02em;text-wrap:balance}
