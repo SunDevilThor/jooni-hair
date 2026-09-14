@@ -440,6 +440,8 @@ body.is-locked{overflow:hidden}
 .footer li+li{margin-top:9px}
 .footer a{color:var(--muted);font-size:.94rem;transition:color .2s var(--ease)}
 .footer a:hover{color:var(--text)}
+.footer .ig-link{display:inline-flex;align-items:center;gap:9px}
+.ico-ig{width:16px;height:16px;flex:none}
 .footer__bottom{
   margin-top:34px;padding-top:20px;border-top:1px solid var(--line);
   display:flex;flex-wrap:wrap;gap:10px 20px;justify-content:space-between;align-items:center;
