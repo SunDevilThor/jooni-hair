@@ -94,9 +94,20 @@
       $$('.filter', filterBar).forEach(function (b) {
         b.setAttribute('aria-selected', String(b.getAttribute('data-filter') === cat));
       });
+      /* A category with no photos yet shows its own panel instead of an
+         empty grid. Add data-empty="<category>" to any such block. */
+      var emptyShown = null;
+      $$('[data-empty]').forEach(function (el) {
+        var match = el.getAttribute('data-empty') === cat;
+        el.hidden = !match;
+        if (match) emptyShown = el;
+      });
       var count = tiles.filter(function (t) { return !t.classList.contains('is-hidden'); }).length;
       var live = $('#filter-status');
-      if (live) live.textContent = count + (count === 1 ? ' look shown' : ' looks shown');
+      if (!live) return;
+      live.textContent = emptyShown
+        ? 'No photos in this category yet'
+        : count + (count === 1 ? ' look shown' : ' looks shown');
     };
     filterBar.addEventListener('click', function (e) {
       var btn = e.target.closest('.filter');
