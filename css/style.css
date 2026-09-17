@@ -6,6 +6,24 @@
 
 @import url('fonts.css');
 
+/* ---------- 0. Texture ----------
+   Original artwork generated for this site to match the distressed
+   Victorian damask direction the client asked for: a worn damask, an
+   aged paper crackle, soft mottling, and sparse brush swirls. Alpha is
+   baked into each SVG so they drop straight into a background-image
+   list, which keeps them clear of the ::before rules already used by
+   .band and .card. Whisper level everywhere, a little heavier only in
+   zones where no photograph competes. */
+:root{
+  --tex-damask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22168%22%20height%3D%22224%22%20viewBox%3D%220%200%20168%20224%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c9b6e8%22%20stroke-opacity%3D%220.075%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M84%206c0%2022-26%2033-26%2058%200%2017%2012%2028%2026%2028s26-11%2026-28c0-25-26-36-26-58z%22%2F%3E%3Cpath%20d%3D%22M84%2030c-7%207-9%2018-3%2025%203%205%209%205%2012%200%205-7%203-18-9-25z%22%2F%3E%3Cpath%20d%3D%22M58%2064c-13-3-22-14-22-27%200-9%205-16%2013-16%206%200%2010%204%2010%2010%200%205-3%208-7%208%22%2F%3E%3Cpath%20d%3D%22M110%2064c13-3%2022-14%2022-27%200-9-5-16-13-16-6%200-10%204-10%2010%200%205%203%208%207%208%22%2F%3E%3Cpath%20d%3D%22M50%2084c-10%205-22%204-29-4-5-6-4-14%202-17%205-3%2010%200%2012%205%22%2F%3E%3Cpath%20d%3D%22M118%2084c10%205%2022%204%2029-4%205-6%204-14-2-17-5-3-10%200-12%205%22%2F%3E%3Cpath%20d%3D%22M84%20118c0%2022-26%2033-26%2058%200%2017%2012%2028%2026%2028s26-11%2026-28c0-25-26-36-26-58z%22%2F%3E%3Cpath%20d%3D%22M84%20142c-7%207-9%2018-3%2025%203%205%209%205%2012%200%205-7%203-18-9-25z%22%2F%3E%3Cpath%20d%3D%22M58%20176c-13-3-22-14-22-27%200-9%205-16%2013-16%206%200%2010%204%2010%2010%200%205-3%208-7%208%22%2F%3E%3Cpath%20d%3D%22M110%20176c13-3%2022-14%2022-27%200-9-5-16-13-16-6%200-10%204-10%2010%200%205%203%208%207%208%22%2F%3E%3Cpath%20d%3D%22M84%2092c-5%208-5%2018%200%2026%205-8%205-18%200-26z%22%2F%3E%3Cpath%20d%3D%22M0%206c0%2022%2014%2033%2014%2058%200%2017-6%2028-14%2028%22%2F%3E%3Cpath%20d%3D%22M168%206c0%2022-14%2033-14%2058%200%2017%206%2028%2014%2028%22%2F%3E%3Cpath%20d%3D%22M0%20118c0%2022%2014%2033%2014%2058%200%2017-6%2028-14%2028%22%2F%3E%3Cpath%20d%3D%22M168%20118c0%2022-14%2033-14%2058%200%2017%206%2028%2014%2028%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23c9b6e8%22%20fill-opacity%3D%220.075%22%3E%3Ccircle%20cx%3D%2284%22%20cy%3D%22102%22%20r%3D%222.4%22%2F%3E%3Ccircle%20cx%3D%2284%22%20cy%3D%22214%22%20r%3D%222.4%22%2F%3E%3Ccircle%20cx%3D%2236%22%20cy%3D%2237%22%20r%3D%221.7%22%2F%3E%3Ccircle%20cx%3D%22132%22%20cy%3D%2237%22%20r%3D%221.7%22%2F%3E%3Ccircle%20cx%3D%2236%22%20cy%3D%22149%22%20r%3D%221.7%22%2F%3E%3Ccircle%20cx%3D%22132%22%20cy%3D%22149%22%20r%3D%221.7%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  --tex-damask-up:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22168%22%20height%3D%22224%22%20viewBox%3D%220%200%20168%20224%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c9b6e8%22%20stroke-opacity%3D%220.14%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M84%206c0%2022-26%2033-26%2058%200%2017%2012%2028%2026%2028s26-11%2026-28c0-25-26-36-26-58z%22%2F%3E%3Cpath%20d%3D%22M84%2030c-7%207-9%2018-3%2025%203%205%209%205%2012%200%205-7%203-18-9-25z%22%2F%3E%3Cpath%20d%3D%22M58%2064c-13-3-22-14-22-27%200-9%205-16%2013-16%206%200%2010%204%2010%2010%200%205-3%208-7%208%22%2F%3E%3Cpath%20d%3D%22M110%2064c13-3%2022-14%2022-27%200-9-5-16-13-16-6%200-10%204-10%2010%200%205%203%208%207%208%22%2F%3E%3Cpath%20d%3D%22M50%2084c-10%205-22%204-29-4-5-6-4-14%202-17%205-3%2010%200%2012%205%22%2F%3E%3Cpath%20d%3D%22M118%2084c10%205%2022%204%2029-4%205-6%204-14-2-17-5-3-10%200-12%205%22%2F%3E%3Cpath%20d%3D%22M84%20118c0%2022-26%2033-26%2058%200%2017%2012%2028%2026%2028s26-11%2026-28c0-25-26-36-26-58z%22%2F%3E%3Cpath%20d%3D%22M84%20142c-7%207-9%2018-3%2025%203%205%209%205%2012%200%205-7%203-18-9-25z%22%2F%3E%3Cpath%20d%3D%22M58%20176c-13-3-22-14-22-27%200-9%205-16%2013-16%206%200%2010%204%2010%2010%200%205-3%208-7%208%22%2F%3E%3Cpath%20d%3D%22M110%20176c13-3%2022-14%2022-27%200-9-5-16-13-16-6%200-10%204-10%2010%200%205%203%208%207%208%22%2F%3E%3Cpath%20d%3D%22M84%2092c-5%208-5%2018%200%2026%205-8%205-18%200-26z%22%2F%3E%3Cpath%20d%3D%22M0%206c0%2022%2014%2033%2014%2058%200%2017-6%2028-14%2028%22%2F%3E%3Cpath%20d%3D%22M168%206c0%2022-14%2033-14%2058%200%2017%206%2028%2014%2028%22%2F%3E%3Cpath%20d%3D%22M0%20118c0%2022%2014%2033%2014%2058%200%2017-6%2028-14%2028%22%2F%3E%3Cpath%20d%3D%22M168%20118c0%2022-14%2033-14%2058%200%2017%206%2028%2014%2028%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23c9b6e8%22%20fill-opacity%3D%220.14%22%3E%3Ccircle%20cx%3D%2284%22%20cy%3D%22102%22%20r%3D%222.4%22%2F%3E%3Ccircle%20cx%3D%2284%22%20cy%3D%22214%22%20r%3D%222.4%22%2F%3E%3Ccircle%20cx%3D%2236%22%20cy%3D%2237%22%20r%3D%221.7%22%2F%3E%3Ccircle%20cx%3D%22132%22%20cy%3D%2237%22%20r%3D%221.7%22%2F%3E%3Ccircle%20cx%3D%2236%22%20cy%3D%22149%22%20r%3D%221.7%22%2F%3E%3Ccircle%20cx%3D%22132%22%20cy%3D%22149%22%20r%3D%221.7%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  --tex-crackle:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22220%22%20height%3D%22220%22%3E%3Cfilter%20id%3D%22c%22%3E%3CfeTurbulence%20type%3D%22turbulence%22%20baseFrequency%3D%220.62%200.78%22%20numOctaves%3D%223%22%20seed%3D%2219%22%2F%3E%3CfeColorMatrix%20values%3D%220%200%200%200%200.79%200%200%200%200%200.71%200%200%200%200%200.91%200%200%200%20-1.8%200.2700%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22220%22%20height%3D%22220%22%20filter%3D%22url%28%23c%29%22%2F%3E%3C%2Fsvg%3E");
+  --tex-mottle:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22360%22%20height%3D%22360%22%3E%3Cfilter%20id%3D%22m%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.011%200.017%22%20numOctaves%3D%224%22%20seed%3D%227%22%2F%3E%3CfeColorMatrix%20values%3D%220%200%200%200%200.60%200%200%200%200%200.48%200%200%200%200%200.78%200%200%200%20-1.05%200.1300%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22360%22%20height%3D%22360%22%20filter%3D%22url%28%23m%29%22%2F%3E%3C%2Fsvg%3E");
+  --tex-swirl:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22300%22%20height%3D%22300%22%20viewBox%3D%220%200%20300%20300%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b9d9e8%22%20stroke-opacity%3D%220.09%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M62%2074c14-12%2033-6%2036%2010%203%2014-11%2024-22%2018-9-5-9-19%202-22%208-2%2014%205%2012%2012%22%2F%3E%3Cpath%20d%3D%22M212%2042c17-9%2035%202%2034%2019-1%2015-17%2022-27%2014-8-7-5-20%206-21%208-1%2013%207%2010%2014%22%2F%3E%3Cpath%20d%3D%22M148%20176c19-11%2040%202%2039%2022-1%2017-19%2026-31%2017-10-8-7-23%206-25%209-1%2015%208%2011%2016%22%2F%3E%3Cpath%20d%3D%22M54%20232c12-8%2026-2%2027%2010%201%2011-11%2017-19%2012-6-4-6-14%203-16%22%2F%3E%3Cpath%20d%3D%22M246%20214c14-7%2029%203%2027%2017-2%2012-15%2017-23%2011-6-5-4-15%205-16%22%2F%3E%3Cpath%20d%3D%22M96%20132c-14%206-30-1-33-15%22%2F%3E%3Cpath%20d%3D%22M188%20104c14%206%2030-1%2033-15%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  --tex-plum:linear-gradient(176deg,rgba(74,34,98,.15) 0%,rgba(74,34,98,0) 38%,rgba(104,32,84,.06) 78%,rgba(104,32,84,.12) 100%);
+}
+
+
 /* ---------- 1. Tokens ---------- */
 :root{
   --ink:#09090c;
@@ -21,8 +39,8 @@
   --grad:linear-gradient(115deg,#ff2d8b 0%,#c13bd6 55%,#a855f7 100%);
   --grad-soft:linear-gradient(115deg,rgba(255,45,139,.16),rgba(168,85,247,.16));
 
-  --display:'Syne',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
-  --body:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --display:'Cormorant Garamond',ui-serif,Georgia,'Times New Roman',serif;
+  --body:'Karla',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
 
   --wrap:1180px;
   --pad:20px;
@@ -39,7 +57,11 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{
   margin:0;
-  background:var(--ink);
+  background-color:var(--ink);
+  background-image:var(--tex-damask),var(--tex-mottle),var(--tex-plum);
+  background-repeat:repeat,repeat,no-repeat;
+  background-size:168px 224px,360px 360px,100% 100%;
+  background-attachment:scroll,scroll,fixed;
   color:var(--text);
   font-family:var(--body);
   font-size:16px;
@@ -53,7 +75,7 @@ img,video{max-width:100%;height:auto;display:block}
 [hidden]{display:none!important}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-h1,h2,h3,h4{font-family:var(--display);font-weight:800;line-height:1.02;margin:0;letter-spacing:-.02em;text-wrap:balance}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.06;margin:0;letter-spacing:-.005em;text-wrap:balance}
 p{margin:0}
 ul,ol{margin:0;padding:0;list-style:none}
 figure,blockquote,figcaption,dl,dd{margin:0;padding:0}
@@ -84,12 +106,12 @@ cite{font-style:normal}
   content:"";width:26px;height:2px;border-radius:2px;background:var(--grad);flex:none;
 }
 .h-xl{font-size:clamp(2.15rem,9.2vw,5rem)}
-.h-lg{font-size:clamp(1.7rem,7vw,3.4rem)}
-.h-md{font-size:clamp(1.3rem,5.4vw,2.1rem)}
+.h-lg{font-size:clamp(1.95rem,8vw,4rem)}
+.h-md{font-size:clamp(1.5rem,6vw,2.45rem)}
 /* Manual line breaks in headings apply from small tablet up only.
    On phones the text wraps naturally instead of orphaning a word. */
 .br-lg{display:none}
-.h-sm{font-size:1.1rem;font-weight:700;letter-spacing:-.01em}
+.h-sm{font-size:1.32rem;font-weight:600;letter-spacing:0}
 .lede{font-size:1.06rem;color:var(--muted);max-width:56ch}
 .muted{color:var(--muted)}
 .grad-text{
@@ -127,7 +149,7 @@ cite{font-style:normal}
 .header__bar{
   height:var(--header-h);display:flex;align-items:center;justify-content:space-between;gap:16px;
 }
-.logo{font-family:var(--display);font-weight:800;font-size:1.32rem;letter-spacing:.02em;line-height:1}
+.logo{font-family:var(--display);font-weight:600;font-size:1.62rem;letter-spacing:.06em;line-height:1}
 .logo span{display:inline-block}
 .logo .dot{
   width:7px;height:7px;border-radius:50%;background:var(--grad);
@@ -195,7 +217,7 @@ body.is-locked{overflow:hidden}
 /* The headline is sized from this column, not the viewport, so the word
    "alternative" can never outgrow the space it has. */
 .hero__copy{container-type:inline-size}
-.hero__title{margin-bottom:18px;font-size:clamp(2.15rem,9.2vw,4.5rem)}
+.hero__title{margin-bottom:18px;font-size:clamp(2.4rem,13.5vw,5.5rem)}
 .hero__title .line{display:block}
 .hero__sub{
   font-family:var(--display);font-size:clamp(1.05rem,4.4vw,1.5rem);font-weight:700;
@@ -227,7 +249,9 @@ body.is-locked{overflow:hidden}
 /* ---------- 8. Marquee ---------- */
 .marquee{
   border-block:1px solid var(--line);
-  background:var(--ink-2);
+  background-color:var(--ink-2);
+  background-image:var(--tex-damask-up);
+  background-size:168px 224px;
   overflow:hidden;padding-block:16px;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
@@ -235,7 +259,8 @@ body.is-locked{overflow:hidden}
 .marquee__track{display:flex;width:max-content;animation:slide 34s linear infinite}
 .marquee__group{display:flex;align-items:center;gap:26px;padding-right:26px}
 .marquee__item{
-  font-family:var(--display);font-weight:700;font-size:1.02rem;letter-spacing:.02em;
+  font-family:var(--body);font-weight:600;font-size:.82rem;
+  letter-spacing:.2em;text-transform:uppercase;
   color:var(--muted);white-space:nowrap;
 }
 .marquee__item:nth-child(3n+1){color:var(--text)}
@@ -348,7 +373,10 @@ body.is-locked{overflow:hidden}
 /* ---------- 12. Services ---------- */
 .menu{display:grid;gap:14px}
 .menu__group{
-  background:var(--ink-2);border:1px solid var(--line);border-radius:var(--r-md);
+  background-color:var(--ink-2);
+  background-image:var(--tex-crackle);
+  background-size:220px 220px;
+  border:1px solid var(--line);border-radius:var(--r-md);
   padding:26px 22px;
 }
 .menu__head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:18px}
@@ -398,7 +426,11 @@ body.is-locked{overflow:hidden}
 /* ---------- 15. CTA band ---------- */
 .band{
   position:relative;overflow:hidden;border-radius:var(--r-lg);
-  border:1px solid var(--line);background:var(--ink-2);
+  border:1px solid var(--line);
+  background-color:var(--ink-2);
+  background-image:var(--tex-swirl),var(--tex-damask-up);
+  background-repeat:repeat,repeat;
+  background-size:300px 300px,168px 224px;
   padding:40px 24px;text-align:center;
 }
 .band::before{
@@ -435,7 +467,11 @@ body.is-locked{overflow:hidden}
 .steps{counter-reset:step;display:grid;gap:14px}
 .steps li{
   counter-increment:step;position:relative;padding-left:52px;
-  border:1px solid var(--line);border-radius:var(--r-md);background:var(--ink-2);padding-block:18px;padding-right:20px;
+  border:1px solid var(--line);border-radius:var(--r-md);
+  background-color:var(--ink-2);
+  background-image:var(--tex-crackle);
+  background-size:220px 220px;
+  padding-block:18px;padding-right:20px;
 }
 .steps li::before{
   content:counter(step,decimal-leading-zero);
@@ -447,7 +483,14 @@ body.is-locked{overflow:hidden}
 .steps p{font-size:.93rem;color:var(--muted)}
 
 /* ---------- 17. Footer ---------- */
-.footer{border-top:1px solid var(--line);background:var(--ink-2);padding-block:44px 30px;margin-top:20px}
+.footer{
+  border-top:1px solid var(--line);
+  background-color:var(--ink-2);
+  background-image:var(--tex-damask-up),var(--tex-crackle);
+  background-repeat:repeat,repeat;
+  background-size:168px 224px,220px 220px;
+  padding-block:44px 30px;margin-top:20px;
+}
 .footer__grid{display:grid;gap:30px}
 .footer__brand .logo{font-size:1.5rem;margin-bottom:12px;display:inline-block}
 .footer h4{
@@ -503,7 +546,7 @@ body.is-locked{overflow:hidden}
   .burger,.drawer{display:none}
   .hero{padding-block:78px 96px}
   .hero__grid{grid-template-columns:1.18fr .82fr;gap:52px;align-items:center}
-  .hero__title{font-size:clamp(2.6rem,5.9vw,4.5rem)}
+  .hero__title{font-size:clamp(2.9rem,8vw,5.5rem)}
   .hero__figure img{aspect-ratio:3/4;max-height:620px;object-position:50% 24%}
   .menu{grid-template-columns:repeat(3,1fr);align-items:start}
   .split{grid-template-columns:.85fr 1.15fr;gap:52px}
@@ -521,5 +564,5 @@ body.is-locked{overflow:hidden}
    a fraction of its own column, which self corrects if the grid ratio or
    the wrapper width is ever changed. The clamps above are the fallback. */
 @supports (font-size:1cqi){
-  .hero__title{font-size:min(4.5rem,11cqi)}
+  .hero__title{font-size:min(5.5rem,15.5cqi)}
 }
