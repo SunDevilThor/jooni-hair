@@ -37,17 +37,38 @@
 
 /* ---------- 2. Reset ---------- */
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;background:var(--ink)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{
   margin:0;
-  background:var(--ink);
+  background:transparent;
   color:var(--text);
   font-family:var(--body);
   font-size:16px;
   line-height:1.65;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
+}
+
+/* Charcoal damask field. One fixed layer behind the whole document rather
+   than a repeating tile, so the ornament frames the page edges and nothing
+   seams or stretches however long the gallery runs. A fixed pseudo-element
+   is used instead of background-attachment:fixed because iOS Safari drops
+   that on scroll. The plate is landscape, and its ornament sits in the
+   left and right thirds with a near-black middle, so narrow screens get
+   their own plate: the same artwork scaled down and mirror-stacked, which
+   keeps a motif at about a sixth of the screen and keeps the dark middle
+   column under the text instead of one motif filling half the phone. */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:var(--ink) url("../assets/img/bg-damask-narrow.webp") center/cover no-repeat;
+}
+@media (min-width:760px){
+  body::before{background-image:url("../assets/img/bg-damask-1536.webp")}
 }
 /* height:auto keeps HTML width/height attributes from fixing a rendered
    height. The attributes stay, so the browser still reserves the space. */
