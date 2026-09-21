@@ -21,8 +21,8 @@
 <link rel="preload" href="assets/fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/karla.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="css/style.css?v=7">
-<script src="js/main.js?v=7" defer></script>
+<link rel="stylesheet" href="css/style.css?v=8">
+<script src="js/main.js?v=8" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -61,7 +61,17 @@
     <div class="wrap">
       <p class="eyebrow">Book</p>
       <h1 class="h-lg">Let's get you <br class="br-lg">in the chair.</h1>
-      <p class="lede" style="margin-top:18px">Booking runs through Instagram. Send a DM with what you have in mind and a couple of photos of your hair as it is now, and Joon will come back with a plan, a quote and the time it needs.</p>
+      <p class="lede" style="margin-top:18px" data-dm-only>Booking runs through Instagram. Send a DM with what you have in mind and a couple of photos of your hair as it is now, and Joon will come back with a plan, a quote and the time it needs.</p>
+      <p class="lede" style="margin-top:18px" data-booking-only hidden>Pick a time that suits you and book it yourself, or send a message first if you want to talk the plan through. Either way, bring a couple of photos of your hair as it is now.</p>
+
+      <!-- Square booking button. Hidden until a booking link is set in
+           js/main.js (CONFIG.BOOKING_URL). Until then the page never
+           mentions online booking, so nothing promises a calendar that
+           does not exist yet. -->
+      <div data-booking hidden style="margin-top:28px">
+        <a class="btn btn--primary" href="#" target="_blank" rel="noopener">Book online</a>
+      </div>
+
       <div class="hero__actions" style="margin-top:28px">
         <a class="btn btn--primary" data-dm-primary href="https://ig.me/m/jooni.hair" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.4"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.2" fill="currentColor" stroke="none"/></svg>
@@ -83,18 +93,30 @@
   <section class="section section--tight" style="padding-top:0">
     <div class="wrap">
       <p class="eyebrow">How it works</p>
+      <!-- Step 1 and step 3 have two versions. Which pair shows depends on
+           whether CONFIG.BOOKING_URL is set, because "send a DM and she will
+           find you a day" and "pick your own slot" are different journeys and
+           describing the wrong one is worse than describing none. -->
       <ol class="steps reveal" style="margin-top:6px">
-        <li>
+        <li data-dm-only>
           <h3>Send a DM</h3>
           <p>Tell her what you want and send photos of your hair in natural light, plus any inspiration pictures you have saved.</p>
+        </li>
+        <li data-booking-only hidden>
+          <h3>Get in touch</h3>
+          <p>Book a slot yourself, or send a message with photos of your hair in natural light and any inspiration pictures you have saved.</p>
         </li>
         <li>
           <h3>Get your plan and quote</h3>
           <p>She will tell you what is realistic on your hair, whether it takes one session or more, and what it costs before you commit.</p>
         </li>
-        <li>
+        <li data-dm-only>
           <h3>Lock in the date</h3>
           <p>Pick a day that works, and your appointment is set at The Parlour SCV.</p>
+        </li>
+        <li data-booking-only hidden>
+          <h3>Confirm the time</h3>
+          <p>Vivid work can need longer than a standard slot, so she may adjust the time once she has seen your hair.</p>
         </li>
         <li>
           <h3>Come in</h3>
@@ -111,7 +133,8 @@
         <h2 class="h-md">Not sure what <br class="br-lg">to say?</h2>
         <div class="stack" style="margin-top:18px">
           <p class="muted">Fill this in and it writes the DM for you. Copy it, hit the Instagram button, paste it and add your photos.</p>
-          <p class="muted">Nothing is sent from this page and nothing is stored. It just builds the text on your own device.</p>
+          <p class="muted" data-dm-note>Nothing is sent from this page and nothing is stored. It just builds the text on your own device.</p>
+          <p class="muted" data-form-only hidden>No Instagram? Add your email and send it straight to Joon instead. She will reply to you by email.</p>
         </div>
         <div class="note" style="margin-top:22px">
           <strong>Helps her quote you properly:</strong> photos in daylight without a filter, and anything she should know about your color history like box dye, henna or a previous bleach.
@@ -151,6 +174,22 @@
             <label for="f-when">Days that work for you</label>
             <input id="f-when" name="when" type="text" placeholder="Weekends or Thursday evenings">
           </div>
+
+          <!-- Only needed to send straight to her inbox. Both fields and
+               the send button stay hidden until an access key is set in
+               js/main.js (CONFIG.FORM_KEY), so with no key the page is
+               exactly the DM helper it has always been. -->
+          <div class="field" data-form-only hidden>
+            <label for="f-email">Your email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="alex@example.com">
+          </div>
+          <div class="field" data-form-only hidden>
+            <label for="f-phone">Your phone, if you would rather she texted</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="Optional">
+          </div>
+          <!-- Honeypot. Real people never see it, so anything that ticks
+               it is a bot and the send is dropped silently. -->
+          <input id="f-botcheck" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none">
         </form>
 
         <p class="muted" style="font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">Your message</p>
@@ -158,8 +197,10 @@
         <div class="composer__actions">
           <button class="btn btn--ghost" type="button" id="dm-copy">Copy message</button>
           <button class="btn btn--primary" type="button" id="dm-open">Open the DM</button>
+          <button class="btn btn--primary" type="button" id="dm-send" data-form-only hidden>Send to Joon</button>
         </div>
         <p class="copied" id="dm-status" role="status" aria-live="polite"></p>
+        <p class="muted" data-form-only hidden style="font-size:.84rem;margin-top:10px">Sending shares your answers and your email with Joon so she can reply. Nothing else is collected.</p>
       </div>
     </div>
   </section>

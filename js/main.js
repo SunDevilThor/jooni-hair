@@ -8,16 +8,37 @@
 
   /* ----------------------------------------------------------
      CONFIG
-     DEPOSIT_URL is the only thing that needs to change when Joon
-     sends her Square or Stripe payment link. Paste the full URL
-     between the quotes and the deposit button appears on the
-     booking page automatically. Leave it empty and the site
-     stays on the DM only flow.
+
+     Four strings turn features on. Every one of them is safe to
+     leave empty: the page falls back to the Instagram only flow
+     and nothing broken or half finished is ever shown.
+
+     BOOKING_URL  Her Square Appointments booking link. In Square:
+                  Appointments > Online Booking > Channels > "Add
+                  your booking flow to an existing site" > Get URL.
+                  Setting it puts a "Book online" button at the top
+                  of book.html and demotes the Instagram button.
+
+     FORM_KEY     Her Web3Forms access key, a UUID. Get it at
+                  web3forms.com by entering the email the enquiries
+                  should go to; the key arrives by return email.
+                  It is public by design and belongs in the source.
+                  Setting it turns the message helper into a form
+                  that can send straight to her inbox, as well as
+                  building a DM.
+
+     DEPOSIT_URL  A Square payment link or invoice, for taking a
+                  deposit by hand. Square charges for automatic
+                  deposits; a payment link is free.
      ---------------------------------------------------------- */
   var CONFIG = {
     IG_HANDLE: 'jooni.hair',
     DM_URL: 'https://ig.me/m/jooni.hair',
     PROFILE_URL: 'https://www.instagram.com/jooni.hair/',
+    BOOKING_URL: '',
+    BOOKING_LABEL: 'Book online',
+    FORM_KEY: '',
+    FORM_SUBJECT: 'New booking enquiry from the website',
     DEPOSIT_URL: '',
     DEPOSIT_LABEL: 'Pay deposit and book'
   };
@@ -172,6 +193,27 @@
     });
   }
 
+  /* ---------- Square booking button, only when a link exists ----------
+     When she has a bookable calendar, that becomes the main way in and
+     Instagram steps back to a secondary option. Until then the page
+     never mentions online booking at all. */
+  var booking = $('[data-booking]');
+  if (booking) {
+    if (CONFIG.BOOKING_URL) {
+      var bLink = $('a', booking);
+      bLink.href = CONFIG.BOOKING_URL;
+      bLink.textContent = CONFIG.BOOKING_LABEL;
+      booking.hidden = false;
+      $$('[data-dm-primary]').forEach(function (el) {
+        el.classList.replace('btn--primary', 'btn--ghost');
+      });
+      $$('[data-dm-only]').forEach(function (el) { el.hidden = true; });
+      $$('[data-booking-only]').forEach(function (el) { el.hidden = false; });
+    } else {
+      booking.hidden = true;
+    }
+  }
+
   /* ---------- deposit button, only when a link exists ---------- */
   var deposit = $('[data-deposit]');
   if (deposit) {
@@ -243,6 +285,91 @@
     openBtn.addEventListener('click', function () {
       window.open(CONFIG.DM_URL, '_blank', 'noopener');
     });
+
+    /* ---------- send it straight to her inbox ----------
+       Same four answers, a second way out. This exists for the
+       visitor who has no Instagram account, which is the whole
+       reason it was asked for. It posts to Web3Forms over fetch
+       rather than a normal form submit, so nobody leaves the page
+       and there is no thank you page to maintain. Everything below
+       stays hidden until CONFIG.FORM_KEY is set. */
+    var sendBtn = $('#dm-send');
+    if (sendBtn && CONFIG.FORM_KEY) {
+      var email = $('#f-email');
+      var phone = $('#f-phone');
+      var trap  = $('#f-botcheck');
+
+      $$('[data-form-only]').forEach(function (el) { el.hidden = false; });
+      $$('[data-dm-note]').forEach(function (el) { el.hidden = true; });
+      /* Only one primary button in a row, so Send takes the weight and
+         the DM becomes the alternative rather than a rival. */
+      openBtn.classList.replace('btn--primary', 'btn--ghost');
+
+      var busy = false;
+      var say = function (msg, hold) {
+        status.textContent = msg;
+        if (hold) return;
+        window.setTimeout(function () { status.textContent = ''; }, 5000);
+      };
+
+      sendBtn.addEventListener('click', function () {
+        if (busy) return;
+        if (trap && trap.checked) return;               // bot filled the honeypot
+
+        var addr = email.value.trim();
+        if (!addr || addr.indexOf('@') < 1 || addr.indexOf('.', addr.indexOf('@')) < 0) {
+          say('Add an email address so Joon can reply to you.');
+          email.focus();
+          return;
+        }
+
+        busy = true;
+        var label = sendBtn.textContent;
+        sendBtn.textContent = 'Sending';
+        sendBtn.disabled = true;
+        say('Sending your message.', true);
+
+        var body = {
+          access_key: CONFIG.FORM_KEY,
+          subject: CONFIG.FORM_SUBJECT,
+          from_name: 'jooni.hair website',
+          replyto: addr,
+          name: $('#f-name').value.trim() || 'Not given',
+          email: addr,
+          phone: phone.value.trim() || 'Not given',
+          service: $('#f-service').value || 'Not chosen',
+          hair_now: $('#f-current').value.trim() || 'Not given',
+          availability: $('#f-when').value.trim() || 'Not given',
+          message: build()
+        };
+
+        var reset = function () {
+          busy = false;
+          sendBtn.textContent = label;
+          sendBtn.disabled = false;
+        };
+
+        var failed = function () {
+          reset();
+          say('That did not send. Try the Instagram DM instead, or email is fine too.', true);
+        };
+
+        window.fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(body)
+        }).then(function (res) {
+          return res.json().then(function (data) {
+            if (!res.ok || !data.success) return failed();
+            reset();
+            form.reset();
+            render();
+            email.value = '';
+            say('Sent. Joon will reply to ' + addr + '.', true);
+          });
+        }, failed);
+      });
+    }
   }
 
   /* ---------- footer year ---------- */
