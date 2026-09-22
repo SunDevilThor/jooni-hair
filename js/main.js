@@ -43,9 +43,11 @@
        another state. Never leave someone else's calendar in here. */
     BOOKING_URL: '',
     BOOKING_LABEL: 'Book online',
-    /* Thor's key, contact@buildsbythor.com, for testing. SWAP FOR JOON'S
-       before handover or her enquiries keep landing in his inbox. */
-    FORM_KEY: '1132d22e-cd4b-4a70-a4a9-491f72bd0b44',
+    /* Joon's own Web3Forms key, sent 9/22. Enquiries go to whichever
+       address she registered it against, which only she knows. Thor's
+       testing key was 1132d22e-cd4b-4a70-a4a9-491f72bd0b44 and is no
+       longer in use here. */
+    FORM_KEY: 'dab7612d-f0a9-416d-9c68-ffa6f3c50ceb',
     FORM_SUBJECT: 'New booking enquiry from the website',
     DEPOSIT_URL: '',
     DEPOSIT_LABEL: 'Pay deposit and book'
