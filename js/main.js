@@ -35,7 +35,9 @@
     IG_HANDLE: 'jooni.hair',
     DM_URL: 'https://ig.me/m/jooni.hair',
     PROFILE_URL: 'https://www.instagram.com/jooni.hair/',
-    BOOKING_URL: '',
+    /* Thor's own Square Appointments calendar, for seeing the booking
+       state before Joon has one. SWAP FOR HERS before handover. */
+    BOOKING_URL: 'https://app.squareup.com/appointments/book/dl83hfa87v4rtf/LZ3DDBYV6BK8Q/start',
     BOOKING_LABEL: 'Book online',
     /* Thor's key, contact@buildsbythor.com, for testing. SWAP FOR JOON'S
        before handover or her enquiries keep landing in his inbox. */
