@@ -35,9 +35,13 @@
     IG_HANDLE: 'jooni.hair',
     DM_URL: 'https://ig.me/m/jooni.hair',
     PROFILE_URL: 'https://www.instagram.com/jooni.hair/',
-    /* Thor's own Square Appointments calendar, for seeing the booking
-       state before Joon has one. SWAP FOR HERS before handover. */
-    BOOKING_URL: 'https://app.squareup.com/appointments/book/dl83hfa87v4rtf/LZ3DDBYV6BK8Q/start',
+    /* Paste Joon's Square booking link here. Thor's own calendar was in
+       this slot briefly, to walk the booking state before she had one:
+       https://app.squareup.com/appointments/book/dl83hfa87v4rtf/LZ3DDBYV6BK8Q/start
+       It came back out before she was sent the site, because a visitor
+       clicking Book online was being sent to a different business in
+       another state. Never leave someone else's calendar in here. */
+    BOOKING_URL: '',
     BOOKING_LABEL: 'Book online',
     /* Thor's key, contact@buildsbythor.com, for testing. SWAP FOR JOON'S
        before handover or her enquiries keep landing in his inbox. */
