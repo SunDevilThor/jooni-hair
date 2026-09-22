@@ -37,7 +37,9 @@
     PROFILE_URL: 'https://www.instagram.com/jooni.hair/',
     BOOKING_URL: '',
     BOOKING_LABEL: 'Book online',
-    FORM_KEY: '',
+    /* Thor's key, contact@buildsbythor.com, for testing. SWAP FOR JOON'S
+       before handover or her enquiries keep landing in his inbox. */
+    FORM_KEY: '1132d22e-cd4b-4a70-a4a9-491f72bd0b44',
     FORM_SUBJECT: 'New booking enquiry from the website',
     DEPOSIT_URL: '',
     DEPOSIT_LABEL: 'Pay deposit and book'
