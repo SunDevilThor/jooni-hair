@@ -453,7 +453,10 @@ body.is-locked{overflow:hidden}
   min-height:96px;
 }
 .composer__actions{display:grid;gap:10px}
-.copied{font-size:.82rem;color:var(--magenta);font-weight:600;min-height:1.2em}
+/* min-height reserves the line whether or not there is a message, so the
+   block below never jumps when one appears. The margin keeps it off the
+   buttons, which otherwise read as one crowded stack. */
+.copied{font-size:.82rem;color:var(--magenta);font-weight:600;min-height:1.2em;margin-top:18px}
 
 /* steps */
 .steps{counter-reset:step;display:grid;gap:14px}
