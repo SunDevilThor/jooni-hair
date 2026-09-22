@@ -1,0 +1,41 @@
+# Cloudflare Pages cache policy.
+#
+# This file is the real fix for the problem Joon hit on 9/17, when she
+# could not see updates. GitHub Pages sends a flat 10 minute cache on
+# everything and gives you no way to change it, so the ?v= query strings
+# were the only lever available. Cloudflare Pages honours this file, so
+# each kind of file can be cached for as long as it actually deserves.
+#
+# Keep ?v= on the stylesheet and script regardless. It costs nothing and
+# it is what makes the immutable rule below safe.
+
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# HTML always revalidates, so a copy someone has open picks up a change
+# on the next load rather than up to ten minutes later.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Versioned by ?v= in the markup, so a given URL never changes meaning.
+# Safe to cache hard and skip revalidation entirely.
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Subset woff2 files that will not change without a new filename.
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Photographs are cached for a day, not a year, deliberately. Images in
+# this project HAVE been replaced under the same filename: the hero and
+# the About portrait were both overwritten on 9/21 when Joon sent real
+# photographs. immutable here would have pinned the reel frames in every
+# visitor's browser for a year with no way to reach them.
+/assets/img/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/assets/video/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
