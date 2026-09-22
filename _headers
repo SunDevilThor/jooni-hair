@@ -1,21 +1,38 @@
-# Cloudflare Pages cache policy.
+# Cloudflare cache policy.
 #
-# This file is the real fix for the problem Joon hit on 9/17, when she
-# could not see updates. GitHub Pages sends a flat 10 minute cache on
-# everything and gives you no way to change it, so the ?v= query strings
-# were the only lever available. Cloudflare Pages honours this file, so
-# each kind of file can be cached for as long as it actually deserves.
+# This is the real fix for the problem Joon hit on 9/17, when she could
+# not see updates. GitHub Pages sends a flat ten minute cache on
+# everything with no way to change it, which is the only reason the ?v=
+# query strings exist. Cloudflare honours per path rules, so each kind
+# of file is cached for as long as it actually deserves.
+#
+# RULES ARE CUMULATIVE, NOT OVERRIDING. This matters and it is the one
+# thing that is easy to get wrong. A path matching several rules gets
+# every matching rule's headers appended, so putting Cache-Control in a
+# /* block and again in /css/* produces this:
+#
+#   cache-control: public, max-age=0, must-revalidate, public,
+#                  max-age=31536000, immutable
+#
+# Two policies in one header, and the first max-age wins, so the long
+# cache silently does nothing. That is exactly what the first version of
+# this file did. Cache-Control therefore appears in the specific rules
+# ONLY, never in /*, and every path that needs one has its own line.
 #
 # Keep ?v= on the stylesheet and script regardless. It costs nothing and
 # it is what makes the immutable rule below safe.
 
+# Security headers are safe to apply everywhere: they do not conflict
+# when appended, because no other rule sets them.
 /*
-  Cache-Control: public, max-age=0, must-revalidate
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
 
-# HTML always revalidates, so a copy someone has open picks up a change
-# on the next load rather than up to ten minutes later.
+# HTML always revalidates, so a page someone has open picks up a change
+# on the next load. "/" is listed separately because /*.html does not
+# match the bare root.
+/
+  Cache-Control: public, max-age=0, must-revalidate
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
 
@@ -39,3 +56,11 @@
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 /assets/video/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/assets/favicon.svg
+  Cache-Control: public, max-age=604800
+
+# Crawler files. Short enough that a fix reaches Google the same day.
+/robots.txt
+  Cache-Control: public, max-age=3600
+/sitemap.xml
+  Cache-Control: public, max-age=3600
