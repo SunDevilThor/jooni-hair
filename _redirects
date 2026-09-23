@@ -1,0 +1,20 @@
+# The site is served from the repo root, so repository housekeeping files
+# end up publicly reachable alongside the pages. None of them contain
+# anything sensitive, but they are not part of the website and an indexable
+# site should not be offering Google a README to crawl.
+#
+# 301 to the homepage rather than 404, because these are not missing pages,
+# they are files that simply have no business being a URL.
+
+/wrangler.jsonc   /   301
+/README.md        /   301
+/.gitignore       /   301
+
+# Legacy .html addresses. Cloudflare already 307s these, but an explicit
+# permanent redirect tells Google the move is final rather than temporary,
+# which matters for passing on whatever the old github.io URLs had earned.
+/index.html       /            301
+/services.html    /services    301
+/gallery.html     /gallery     301
+/book.html        /book        301
+/about.html       /about       301
