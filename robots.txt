@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sundevilthor.github.io/jooni-hair/sitemap.xml
+Sitemap: https://joonihairdomain.com/sitemap.xml

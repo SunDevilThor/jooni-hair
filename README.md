@@ -3,7 +3,7 @@
 Production website for Joon, an alternative hair stylist working out of
 The Parlour SCV in Santa Clarita Valley, California.
 
-Live: https://sundevilthor.github.io/jooni-hair/
+Live: https://joonihairdomain.com/
 
 ## Build
 
