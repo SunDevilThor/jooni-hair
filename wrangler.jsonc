@@ -1,0 +1,27 @@
+{
+  // Cloudflare Workers config for the static site.
+  //
+  // This exists for exactly one setting: not_found_handling. GitHub Pages
+  // served 404.html automatically for a path that did not exist. Cloudflare
+  // does not unless told, so after the move a bogus URL returned a bare 404
+  // with an empty body and the custom 404 page in this repo was never
+  // reached.
+  //
+  // html_handling is set explicitly to the platform default rather than
+  // left out. It is what turns /services into services.html, and every
+  // internal link, canonical tag and sitemap entry now depends on that
+  // behaviour. Pinning it means a future change to Cloudflare's default
+  // cannot quietly break the URL scheme.
+  //
+  // The project was created through the dashboard, so if a deploy ever
+  // disagrees with this file, this file wins. Delete it to hand control
+  // back to the dashboard settings.
+
+  "name": "jooni-hair",
+  "compatibility_date": "2026-09-23",
+  "assets": {
+    "directory": "./",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}
