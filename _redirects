@@ -10,11 +10,15 @@
 /README.md        /   301
 /.gitignore       /   301
 
-# Legacy .html addresses. Cloudflare already 307s these, but an explicit
-# permanent redirect tells Google the move is final rather than temporary,
-# which matters for passing on whatever the old github.io URLs had earned.
-/index.html       /            301
-/services.html    /services    301
-/gallery.html     /gallery     301
-/book.html        /book        301
-/about.html       /about       301
+# NOT HERE, and it was tried: rules turning /services.html into a 301.
+# Workers' own html_handling normalisation runs BEFORE _redirects, so the
+# platform answers those with a 307 and the rules never fire. Verified
+# against the live site rather than assumed.
+#
+# Setting html_handling to "none" would hand them back to this file, but it
+# would also stop /services resolving at all, and /services is now the
+# canonical URL on every page and in the sitemap. The 307 stays.
+#
+# Practically it costs nothing: the only place those .html URLs ever
+# existed was the github.io address, which is switched off, and Google has
+# been told the real URLs by both canonical tag and sitemap.
