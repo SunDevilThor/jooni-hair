@@ -35,18 +35,16 @@
     IG_HANDLE: 'jooni.hair',
     DM_URL: 'https://ig.me/m/jooni.hair',
     PROFILE_URL: 'https://www.instagram.com/jooni.hair/',
-    /* Paste Joon's Square booking link here. Thor's own calendar was in
-       this slot briefly, to walk the booking state before she had one:
-       https://app.squareup.com/appointments/book/dl83hfa87v4rtf/LZ3DDBYV6BK8Q/start
-       It came back out before she was sent the site, because a visitor
-       clicking Book online was being sent to a different business in
-       another state. Never leave someone else's calendar in here. */
+    /* Joon's Square Appointments booking link goes here when she
+       has one. Setting it turns on the Book online button; leaving
+       it empty keeps the Instagram only flow. It must be her own
+       calendar, never anyone else's. */
     BOOKING_URL: '',
     BOOKING_LABEL: 'Book online',
-    /* Joon's own Web3Forms key, sent 9/22. Enquiries go to whichever
-       address she registered it against, which only she knows. Thor's
-       testing key was 1132d22e-cd4b-4a70-a4a9-491f72bd0b44 and is no
-       longer in use here. */
+    /* Joon's Web3Forms access key. Enquiries from the site's message
+       form go to the email address this key is registered against.
+       If that address changes, get a new key at web3forms.com and
+       replace this string. */
     FORM_KEY: 'dab7612d-f0a9-416d-9c68-ffa6f3c50ceb',
     FORM_SUBJECT: 'New booking enquiry from the website',
     DEPOSIT_URL: '',
